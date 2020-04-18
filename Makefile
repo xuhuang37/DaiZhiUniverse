@@ -32,4 +32,4 @@ mykernel.iso: mykernel.bin
 
 run: mykernel.iso
 	(killall VirtualBox && sleep 1) || true
-	VirtualBox --startvm "DaiZhiUniverse" &
+	VBoxManage startvm "DaiZhiUniverse" &
