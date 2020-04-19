@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.jsx": "javascriptreact",
+    "*.cjson": "jsonc",
+    "*.wxss": "css",
+    "*.wxs": "javascript",
+    "*.tcc": "cpp",
+    "ostream": "cpp",
+    "sstream": "cpp"
+  }
+}
