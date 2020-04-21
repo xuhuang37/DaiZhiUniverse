@@ -52,8 +52,8 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t magicnumber)
     printf("Hello,Dai zhi Universe!\n");
     printf("Hello,Dai zhi Universe!\n");
     GlobalDescriptorTable gdt;
-    InterruptManager interruptManager(&gdt);
-    interruptManager.Activate();
+    InterruptManager interrupts(&gdt);
+    // interrupts.Activate();
     while (1){
     }
 }
