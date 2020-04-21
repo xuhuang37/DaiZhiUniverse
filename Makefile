@@ -11,22 +11,22 @@ objects = loader.o gdt.o port.o interrupts.o interruptstubs.o kernel.o
 
 mykernel.bin: linker.ld $(objects)
 	ld $(LDPARAMS) -T $< -o $@ $(objects)
+	# rm -f $(objects)
 
 
 
 mykernel.iso: mykernel.bin
-	mkdir iso
-	mkdir iso/boot
-	mkdir iso/boot/grub
-	cp $< iso/boot/
-	echo 'set timeout=0' >> iso/boot/grub/grub.cfg
-	echo 'set default=0' >> iso/boot/grub/grub.cfg
-	echo '' >> iso/boot/grub/grub.cfg
-	echo 'menuentry "My Operating System" {' >> iso/boot/grub/grub.cfg
-	echo '  multiboot /boot/mykernel.bin' >> iso/boot/grub/grub.cfg
-	echo '	boot' >> iso/boot/grub/grub.cfg
-	echo '}' >> iso/boot/grub/grub.cfg
-	grub-mkrescue --output=$@ iso
+	rm -rf iso
+	mkdir -p iso/boot/grub
+	cp mykernel.bin iso/boot/mykernel.bin
+	echo 'set timeout=0' 						 > iso/boot/grub/grub.cfg
+	echo 'set default=0' 						>> iso/boot/grub/grub.cfg
+	echo '' 									>> iso/boot/grub/grub.cfg
+	echo 'menuentry "My Operating System" {' 	>> iso/boot/grub/grub.cfg
+	echo '  multiboot /boot/mykernel.bin' 		>> iso/boot/grub/grub.cfg
+	echo '	boot' 								>> iso/boot/grub/grub.cfg
+	echo '}' 									>> iso/boot/grub/grub.cfg
+	grub-mkrescue -o $@ iso
 	rm -rf iso
 
 run: mykernel.iso
@@ -38,4 +38,4 @@ install: mykernel.bin
 	
 .PHONY: clean
 clean:
-	rm -f $(objects) mykernel.bin
+	rm -f $(objects) mykernel.bin mykernel.iso
