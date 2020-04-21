@@ -32,9 +32,11 @@ mykernel.iso: mykernel.bin
 run: mykernel.iso
 	(killall VirtualBox && sleep 1) || true
 	VBoxManage startvm "DaiZhiUniverse" &
-
+	
 install: mykernel.bin
 	sudo cp $< /boot/mykernel.bin
+
+
 	
 .PHONY: clean
 clean:
