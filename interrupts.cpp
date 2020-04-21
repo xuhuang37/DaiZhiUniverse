@@ -66,7 +66,7 @@ picSlaveData(0xA0)
 InterruptManager::~InterruptManager(){}
 
 void InterruptManager::Activate(){
-
+    asm("sti");
 }
 
 uint32_t InterruptManager::handlerInterrupt(uint8_t interruptNumber, uint32_t esp)
