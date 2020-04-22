@@ -53,13 +53,7 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t magicnumber)
     printf("Hello,Dai zhi Universe!\n");
     GlobalDescriptorTable gdt;
     InterruptManager interrupts(&gdt);
-<<<<<<< Updated upstream
-    // interrupts.Activate();
+    interrupts.Activate();
     while (1){
     }
-=======
-    interrupts.Activate();
-    // while (1){
-    // }
->>>>>>> Stashed changes
 }
