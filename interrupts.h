@@ -53,6 +53,8 @@ public:
     
     static void HandleInterruptRequest0x00();
     static void HandleInterruptRequest0x01();
+    
+    static void HandlerException0x01();
 
 };
 

@@ -1,4 +1,4 @@
-GPPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings
+GPPARAMS = -m32 -Iinclude -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
@@ -30,11 +30,15 @@ mykernel.iso: mykernel.bin
 	rm -rf iso
 
 run: mykernel.iso
-	(killall VirtualBox && sleep 1) || true
-	VBoxManage startvm "DaiZhiUniverse" &
-
+	# (killall VirtualBox && sleep 1) || true
+	# VBoxManage startvm "DaiZhiUniverse" &
+	qemu-system-i386 -m 2048 -cdrom mykernel.iso -hda ~/qemu-vm/myos -boot d -d in_asm -monitor stdio -D ./debug/q.log -serial null -s -S & sleep 2
+	mate-terminal -e "gdb -q -x ./tools/gdbinit"
+	
 install: mykernel.bin
 	sudo cp $< /boot/mykernel.bin
+
+
 	
 .PHONY: clean
 clean:

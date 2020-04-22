@@ -3,9 +3,9 @@
 .set CHECKSUM, -(MAGIC + FLAGS)
 
 .section .multiboot
-  .long MAGIC
-  .long FLAGS
-  .long CHECKSUM
+    .long MAGIC
+    .long FLAGS
+    .long CHECKSUM
 
 .section .text
 .extern kernelMain
@@ -16,7 +16,6 @@ loader:
   mov $kernel_stack, %esp
 
   call callConstructors
-  
   push %eax
   push %ebx
   call kernelMain

@@ -66,14 +66,18 @@ picSlaveData(0xA1)
     
 }
 
+
 void InterruptManager::Activate(){
     if (ActiveInterruptManager != 0)
         ActiveInterruptManager->Deactivate();    
     ActiveInterruptManager = this;
+    printf("aaaaaaaaaaaaaaaaaaaaaaaa");
+    printf(" INTERRUPT");
     asm("sti");
 }
 
 void InterruptManager::Deactivate(){
+    printf(" DE INTERRUPT");
     if (ActiveInterruptManager == this){
         ActiveInterruptManager = 0;
         asm("cli");
@@ -82,6 +86,7 @@ void InterruptManager::Deactivate(){
 
 uint32_t InterruptManager::HandlerInterrupt(uint8_t interruptNumber, uint32_t esp)
 {
+    printf(" INTERRUPT");
     if (ActiveInterruptManager != 0){}
     {
         return ActiveInterruptManager->DoHandlerInterrupt(interruptNumber,esp);
@@ -91,7 +96,6 @@ uint32_t InterruptManager::HandlerInterrupt(uint8_t interruptNumber, uint32_t es
 
 uint32_t InterruptManager::DoHandlerInterrupt(uint8_t interruptNumber, uint32_t esp)
 {
-    printf("INTERRUPT");
     if (0x20 <= interruptNumber && interruptNumber < 0x30){}
     {
         picMasterCommand.Write(0x20);
@@ -102,3 +106,4 @@ uint32_t InterruptManager::DoHandlerInterrupt(uint8_t interruptNumber, uint32_t 
     }
     return esp;
 }
+InterruptManager::~InterruptManager(){};

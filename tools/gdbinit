@@ -1,0 +1,5 @@
+file mykernel.bin
+target remote :1234
+break kernelMain
+break _ZN16InterruptManager8ActivateEv
+continue
